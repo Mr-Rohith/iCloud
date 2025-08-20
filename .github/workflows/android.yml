@@ -1,9 +1,9 @@
-name: Build Android APK
+name: Build Android Debug APK
 
 on:
   push:
-    branches: [ main ]
-  workflow_dispatch:
+    branches:
+      - main
 
 jobs:
   build:
@@ -13,25 +13,21 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Set up JDK 17
-        uses: actions/setup-java@v3
-        with:
-          java-version: '17'
-          distribution: 'temurin'
-
-      - name: Install Flutter
+      - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.24.0'
+          flutter-version: '3.24.3'  # your Flutter version
 
-      - name: Flutter pub get
+      - name: Install dependencies
         run: flutter pub get
+        working-directory: overlay
 
-      - name: Build APK
+      - name: Build debug APK
         run: flutter build apk --debug
+        working-directory: overlay
 
-      - name: Upload APK artifact
-        uses: actions/upload-artifact@v4
+      - name: Upload APK
+        uses: actions/upload-artifact@v3
         with:
-          name: app-debug.apk
-          path: build/app/outputs/flutter-apk/app-debug.apk
+          name: android-debug-apk
+          path: overlay/build/app/outputs/flutter-apk/app-debug.apk
