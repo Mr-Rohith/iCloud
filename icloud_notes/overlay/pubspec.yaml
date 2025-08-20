@@ -1,0 +1,22 @@
+name: icloud_notes_wrapper
+description: Wrapper for iCloud Notes with offline cache and Android widget
+publish_to: "none"
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.3.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  connectivity_plus: ^6.0.3
+  flutter_inappwebview: ^6.1.5
+  path_provider: ^2.1.4
+  permission_handler: ^11.3.1
+  shared_preferences: ^2.3.2
+  url_launcher: ^6.3.0
+  flutter_local_notifications: ^17.2.3
+
+flutter:
+  uses-material-design: true
