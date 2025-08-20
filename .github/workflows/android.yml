@@ -18,12 +18,13 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
+          path: .
 
-      # Install Flutter
+      # Set up Flutter
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: "3.22.0" # change to your version
+          flutter-version: "3.22.0" # or match your Flutter SDK
 
       # Install dependencies
       - name: Install dependencies
