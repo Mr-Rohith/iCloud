@@ -4,28 +4,38 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
+      # Checkout full repo so overlay/ is available
       - name: Checkout repository
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
-      - name: Setup Flutter
+      # Install Flutter
+      - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.24.3'  # adjust to your Flutter version
+          flutter-version: "3.22.0" # change to your version
 
+      # Install dependencies
       - name: Install dependencies
         run: flutter pub get
         working-directory: overlay
 
+      # Build debug APK
       - name: Build debug APK
         run: flutter build apk --debug
         working-directory: overlay
 
+      # Upload APK artifact
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
